@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+     'rest_framework_simplejwt',
     'myapp',
 ]
 
@@ -65,6 +66,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+AUTH_USER_MODEL = 'auth.User'
 
 ROOT_URLCONF = 'djangobackend.urls'
 
