@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import AuthService from "../../services/authService"
+import AuthService from "../../utils/AuthService"
 
 const Register = () => {
   const [username, setUsername] = useState("")
