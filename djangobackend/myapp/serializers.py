@@ -2,8 +2,11 @@
 
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import Item
 
-from djangobackend.myapp.models import Item, PlayerInventory
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,12 +31,12 @@ class ItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = '__all__'
 
-class PlayerInventorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PlayerInventory
-        fields = '__all__'
+# class PlayerInventorySerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = PlayerInventory
+#         fields = '__all__'
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email','level','xp','money']
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username', 'email','level','xp','money']

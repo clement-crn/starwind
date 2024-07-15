@@ -4,7 +4,9 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from .serializers import RegisterSerializer, UserSerializer
-
+from django.contrib.auth.models import User
+from .serializers import ItemSerializer, UserSerializer
+from rest_framework import viewsets
 class RegisterAPIView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
@@ -33,3 +35,24 @@ class LoginAPIView(generics.GenericAPIView):
             'access': str(refresh.access_token),
             'user': serializer.data
         })
+
+      
+
+class ItemViewSet(viewsets.ModelViewSet):
+    serializer_class = ItemSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.items.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+# class PlayerInventoryViewSet(viewsets.ModelViewSet):
+#     queryset = PlayerInventory.objects.all()
+#     serializer_class = PlayerInventorySerializer
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
